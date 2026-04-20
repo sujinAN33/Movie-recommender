@@ -2,7 +2,7 @@
 #include <string>
 
 class Movie {
-private:
+private: //제목, 개봉연도, 평균평점만 사용
     int         id;
     std::string title;
     std::string genre;
@@ -23,5 +23,17 @@ public:
     int         getRatingCount()     const;  // 추가
 
     void addRating(double r);               // 추가
-    void display()               const;
+    //void display()               const;  //MovieManager에서 출력 담당하므로 제거
+    
+    //연산자 오버로딩 추가
+    bool operator==(const Movie& other) const;
+    bool operator!=(const Movie& other) const;
+    bool operator<(const Movie& other) const;
+    bool operator>(const Movie& other) const;
+    bool operator<=(const Movie& other) const;
+    bool operator>=(const Movie& other) const;
+
+    friend std::ostream& operator<<(std::ostream& os,const Movie& m);
+
+
 };

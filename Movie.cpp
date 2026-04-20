@@ -30,10 +30,27 @@ void Movie::addRating(double r) {
     ratingCount++;
 }
 
-void Movie::display() const {           // 중복 제거 — 하나만 유지
-    std::cout << id << ". " << title
-              << " (" << releaseYear << ")"
-              << "  평점: " << getAverageRating()
-              << " (" << ratingCount << "건)"
-              << std::endl;
+
+// 연산자 오버로딩
+bool Movie::operator==(const Movie& other) const {
+    return title==other.title&& releaseYear==other.releaseYear;
+}
+
+bool Movie::operator!=(const Movie& other) const {
+    return !(*this == other);
+}
+
+bool Movie::operator<(const Movie& other) const {
+    if(getAverageRating() != other.getAverageRating())
+        return getAverageRating() < other.getAverageRating();
+    return title < other.title;  // 평균 평점이 같으면 제목으로 비교
+}
+
+bool Movie::operator>(const Movie& other) const {return other < *this;}
+bool Movie::operator<=(const Movie& other) const {return !(*this > other);}
+bool Movie::operator>=(const Movie& other) const {return !(*this < other);}
+
+std::ostream& operator<<(std::ostream& os,const Movie& m){
+    os << "["<<m.title<<"]"<<m.releaseYear<<"년, 평점: "<<m.getAverageRating();
+    return os;
 }
