@@ -12,3 +12,27 @@ string User::getEmail() const { return email; }
 void User::display() const {
     cout << "아이디 : "<<id <<",이름 : "<<name<<",이메일 : "<<email<<endl;
 }
+
+//연산자 오버로딩
+bool User::operator==(const User& other) const {
+    return id == other.id && name == other.name && email == other.email;
+}
+bool User::operator!=(const User& other) const {
+    return !(*this == other);
+}
+bool User::operator<(const User& other) const {
+    return id < other.id;
+}
+bool User::operator>(const User& other) const {
+    return id > other.id;
+}
+bool User::operator<=(const User& other) const {
+    return id <= other.id;
+}
+bool User::operator>=(const User& other) const {
+    return id >= other.id;
+}
+std::ostream& operator<<(std::ostream& os, const User& user) {
+    os << "아이디: " << user.id << ", 이름: " << user.name << ", 이메일: " << user.email;
+    return os;
+}
