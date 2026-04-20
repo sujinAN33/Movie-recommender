@@ -23,7 +23,6 @@ public:
     int         getRatingCount()     const;  // 추가
 
     void addRating(double r);               // 추가
-    //void display()               const;  //MovieManager에서 출력 담당하므로 제거
     
     //연산자 오버로딩 추가
     bool operator==(const Movie& other) const;

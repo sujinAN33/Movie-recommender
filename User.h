@@ -12,7 +12,6 @@ public:
     int         getId()    const;
     std::string getName()  const;
     std::string getEmail() const;
-    void display() const;
 
     //연산자 오버로딩
     bool operator==(const User& other) const;

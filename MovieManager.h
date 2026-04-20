@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -8,6 +9,7 @@ private:
     std::vector<Movie> movies; // Assuming Movie is a class that represents a movie
 public:
     void addMovie(const Movie& movie);
+    Movie* findMovieById(int movieId);
     void findByTitle(const std::string& title) const;
     void sortByRating() const;
     void printAll() const;

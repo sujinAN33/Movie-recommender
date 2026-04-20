@@ -12,7 +12,6 @@ public:
     int getUserId() const;
     int getMovieId() const;
     double getScore() const;
-    void display() const;
 
     //연산자 오버로딩
     bool operator==(const Rating& other) const;

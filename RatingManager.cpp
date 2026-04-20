@@ -1,22 +1,29 @@
 #include "RatingManager.h"
 
-void RatingManager::addRating(Movie& movie,User& user,Rating& rating){
-    if(movie.getId() != rating.getMovieId()){
-        std::cerr << "영화의 id와 평점의 영화 id가 일치하지 않습니다." << std::endl;
-        return;
+bool RatingManager::addRating(Movie& movie, Rating& rating){
+
+    for (const auto& existing : ratings) {
+        if (existing.getUserId() == rating.getUserId() &&
+            existing.getMovieId() == rating.getMovieId()) {
+            std::cerr << "이미 평점을 입력한 영화입니다." << std::endl;
+            return false;
+        }
     }
-    else if(user.getId() != rating.getUserId()){
-        std::cerr << "본인의 id와 평점의 사용자 id가 일치하지 않습니다." << std::endl;
-        return;
-    }
-    else{
-        ratings.push_back(rating);
-        movie.addRating(rating.getScore());  // movie에도 똑같이 평점 추가
-    }
-    
+
+    ratings.push_back(rating);
+    movie.addRating(rating.getScore());
+    return true;
 }
-void RatingManager::displayRatings() const {
+
+void RatingManager::displayRatings(const int movieId) const {
+    bool found = false;
     for (const auto& rating : ratings) {
-        std::cout << rating << std::endl;
+        if (rating.getMovieId() == movieId) {
+            std::cout << rating << std::endl;
+            found = true;
+        }
+    }
+    if (!found) {
+        std::cout << "해당 영화에 대한 평점이 없습니다." << std::endl;
     }
 }

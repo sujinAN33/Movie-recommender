@@ -12,11 +12,6 @@ Rating::Rating(int userId, int movieId, double score)
 int Rating::getUserId() const { return userId; }
 int Rating::getMovieId() const { return movieId; }
 double Rating::getScore() const { return score; }
-void Rating::display() const {
-    cout << "User ID: " << userId
-         << ", Movie ID: " << movieId
-         << ", Score: " << score << endl;
-}
 
 // 연산자 오버로딩
 bool Rating::operator==(const Rating& other) const {
@@ -44,8 +39,8 @@ bool Rating::operator>=(const Rating& other) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Rating& rating) {
-    os << "User ID: " << rating.getUserId()
-       << ", Movie ID: " << rating.getMovieId()
-       << ", Score: " << rating.getScore();
+    os << "사용자 id: " << rating.getUserId()
+       << ", 영화 id: " << rating.getMovieId()
+       << ", 평점: " << rating.getScore();
     return os;
 }

@@ -1,4 +1,14 @@
 #include "UserManager.h"
+
+User* UserManager::findUserById(int userId){
+    for (auto& user : users) {
+        if (user.getId() == userId) {
+            return &user;
+        }
+    }
+    return nullptr;
+}
+
 void UserManager::addUser(const User& user) {
     users.push_back(user);
 }

@@ -41,9 +41,10 @@ bool Movie::operator!=(const Movie& other) const {
 }
 
 bool Movie::operator<(const Movie& other) const {
-    if(getAverageRating() != other.getAverageRating())
-        return getAverageRating() < other.getAverageRating();
-    return title < other.title;  // 평균 평점이 같으면 제목으로 비교
+    if (getAverageRating() != other.getAverageRating()) {
+        return getAverageRating() > other.getAverageRating();
+    }
+    return title < other.title;  // 평균 평점이 같으면 제목 오름차순
 }
 
 bool Movie::operator>(const Movie& other) const {return other < *this;}
@@ -51,6 +52,10 @@ bool Movie::operator<=(const Movie& other) const {return !(*this > other);}
 bool Movie::operator>=(const Movie& other) const {return !(*this < other);}
 
 std::ostream& operator<<(std::ostream& os,const Movie& m){
-    os << "["<<m.title<<"]"<<m.releaseYear<<"년, 평점: "<<m.getAverageRating();
+    os<< "영화 ID: " << m.id << "|"
+    << "제목: " << m.title << "|"
+    << "장르: " << m.genre << "|"
+    << "개봉연도: " << m.releaseYear << "|"
+    << "평점: " << m.getAverageRating() << " (" << m.getRatingCount() << "명)\n";
     return os;
 }
