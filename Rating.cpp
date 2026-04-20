@@ -17,3 +17,35 @@ void Rating::display() const {
          << ", Movie ID: " << movieId
          << ", Score: " << score << endl;
 }
+
+// 연산자 오버로딩
+bool Rating::operator==(const Rating& other) const {
+    return userId == other.userId && movieId == other.movieId && score == other.score;
+}
+
+bool Rating::operator!=(const Rating& other) const {
+    return !(*this == other);
+}
+
+bool Rating::operator<(const Rating& other) const {
+    return score < other.score;
+}
+
+bool Rating::operator>(const Rating& other) const {
+    return score > other.score;
+}
+
+bool Rating::operator<=(const Rating& other) const {
+    return score <= other.score;
+}
+
+bool Rating::operator>=(const Rating& other) const {
+    return score >= other.score;
+}
+
+std::ostream& operator<<(std::ostream& os, const Rating& rating) {
+    os << "User ID: " << rating.getUserId()
+       << ", Movie ID: " << rating.getMovieId()
+       << ", Score: " << rating.getScore();
+    return os;
+}

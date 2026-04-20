@@ -12,4 +12,14 @@ public:
     int getMovieId() const;
     double getScore() const;
     void display() const;
+
+    //연산자 오버로딩
+    bool operator==(const Rating& other) const;
+    bool operator!=(const Rating& other) const;
+    bool operator<(const Rating& other) const;
+    bool operator>(const Rating& other) const;
+    bool operator<=(const Rating& other) const;
+    bool operator>=(const Rating& other) const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Rating& rating);
 };
