@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "Movie.h" // Assuming Movie.h defines the Movie class
 class MovieManager {
 private:
