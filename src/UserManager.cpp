@@ -1,5 +1,7 @@
 #include "UserManager.h"
 
+
+
 User* UserManager::findUserById(int userId){
     for (auto& user : users) {
         if (user.getId() == userId) {
@@ -17,7 +19,44 @@ void UserManager::printUsers() const {
         std::cout << u << std::endl;
     }
 }
+// BaseManager의 순수 가상 함수 구현
+void UserManager::loadFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
+        return;
+    }
+    std::string line;
+    getline(file, line); // 헤더 스킵
+    while (getline(file, line)) {
+        std::stringstream ss(line);
+        std::string token;
+        getline(ss, token, ','); int id= stoi(token);
+        getline(ss, token, ','); std::string name = token;
+        getline(ss, token, ','); std::string email = token;   
+        users.push_back(User(id, name, email));
+    }
+    file.close();
+}
+void UserManager::saveToFile(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
+        return;
+    }
+    file << "id,name,email\n"; // 헤더 작성
+    for (const auto& user : users) {
+        file << user.getId() << ","
+             << user.getName() << ","
+             << user.getEmail() << "\n";
+    }
+    file.close();
+}
+int UserManager::size() const {
+    return users.size();
+}
 
+//비교 연산자 오버로드
 bool operator==(const User& lhs, const User& rhs) {
     return lhs.getId() == rhs.getId() &&
            lhs.getName() == rhs.getName() &&

@@ -56,6 +56,11 @@ void Recommender::recommend(int targetUserId) {
     for(const Rating& r:ratingMgr.findByUser(targetUserId)){
         myMovieIds.insert(r.getMovieId());
     }
+    //내가 본 영화가 없다면
+    if(myMovieIds.empty()){
+        cout << "아직 시청한 영화가 없습니다. 영화를 시청하고 평점을 남겨주세요." << endl;
+        return;
+    }
     //유사한 사용자들이 본 영화 중 내가 안 본 영화 찾기
     for(const auto& sim:sims){
         int otherId=sim.first;
@@ -68,6 +73,11 @@ void Recommender::recommend(int targetUserId) {
                 
             }
         }
+    }
+    //공통 영화가 0개이면
+    if(movieReommendScore.empty()){
+        cout << "추천할 영화가 없습니다." << endl;
+        return;
     }
     //추천 점수가 높은 순으로 정렬
     //map을 벡터로 변환하여 정렬

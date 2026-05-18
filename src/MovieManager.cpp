@@ -1,6 +1,4 @@
 #include "MovieManager.h"
-#include <fstream>
-#include <sstream>
 using namespace std;
 
 void MovieManager::addMovie(const Movie& movie) {
@@ -47,7 +45,7 @@ void MovieManager::printAll() const {
 }
 
 // BaseManager의 순수 가상 함수 구현
-void MovieManager::loadFromFile(const std::string& filename) {
+void MovieManager::loadFromFile(const std::string& filename)  {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;

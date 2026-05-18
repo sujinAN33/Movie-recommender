@@ -3,7 +3,8 @@
 #include <vector>
 #include <algorithm>
 #include "User.h"
-class UserManager {
+#include "BaseManager.h"
+class UserManager : public BaseManager {
 private:
     std::vector<User> users;
 public:
@@ -11,6 +12,9 @@ public:
     User* findUserById(int userId);
     void addUser(const User& user); 
     void printUsers() const;
+    void loadFromFile(const std::string& filename);
+    void saveToFile(const std::string& filename) const;
+    int size() const;
 };
 
 bool operator==(const User& lhs, const User& rhs);

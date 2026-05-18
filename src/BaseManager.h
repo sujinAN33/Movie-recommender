@@ -1,5 +1,10 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <string>
+#include <algorithm>
 class BaseManager
 {
 public:

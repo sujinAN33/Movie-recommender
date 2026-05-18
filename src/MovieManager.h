@@ -1,8 +1,4 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 #include "Movie.h" 
 #include "BaseManager.h" 
 class MovieManager : public BaseManager {
