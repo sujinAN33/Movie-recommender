@@ -7,7 +7,8 @@ void MovieManager::addMovie(const Movie& movie) {
     movies.push_back(movie);
 }
 
-Movie* MovieManager::findMovieById(int movieId) {
+
+Movie* MovieManager::findMovieById(int movieId){
     for (auto& movie : movies) {
         if (movie.getId() == movieId) {
             return &movie;
@@ -17,7 +18,7 @@ Movie* MovieManager::findMovieById(int movieId) {
 }
 
 
-Movie* MovieManager::findByTitle(const std::string& title) {
+Movie* MovieManager::findByTitle(const std::string& title){
     for (auto& movie : movies) {
         if (movie.getTitle() == title) {
             return &movie;

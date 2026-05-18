@@ -23,7 +23,7 @@ int Recommender::calculateSim(const vector<Rating>& user1, const vector<Rating>&
     }
     return commonCount * 10 - scoreDiffSum; //유사도 계산: 공통 영화 수 * 10 - 평점 차이의 합
 }
-vector<pair<int, int>> Recommender::findSimilarUsers(int targetUserId, const RatingManager& ratingMgr) {
+vector<pair<int, int>> Recommender::findSimilarUsers(int targetUserId) {
     vector<pair<int,int>> sims; // {사용자 ID, 유사도} 쌍을 저장할 벡터
     vector<Rating> myRatings = ratingMgr.findByUser(targetUserId);
 
@@ -46,9 +46,8 @@ vector<pair<int, int>> Recommender::findSimilarUsers(int targetUserId, const Rat
 
     return sims;
 }
-void Recommender::recommend(int targetUserId, const RatingManager& ratingMgr) {
-    MovieManager movieMgr; // 영화 매니저 객체 생성
-    vector<pair<int,int>> sims=findSimilarUsers(targetUserId,ratingMgr);
+void Recommender::recommend(int targetUserId) {
+    vector<pair<int,int>> sims=findSimilarUsers(targetUserId);
     map<int, int> movieReommendScore; // 영화 ID별 추천 점수 저장
     //유사도 높은 순으로 정렬
 

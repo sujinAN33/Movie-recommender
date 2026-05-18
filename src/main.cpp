@@ -8,9 +8,10 @@ int main(){
     ratingMgr.loadFromFile("data/ratings.csv"); // 평점 데이터 로드
     MovieManager movieMgr;
     movieMgr.loadFromFile("data/movies.csv"); // 영화 데이터 로드
+    Recommender recommender(movieMgr, ratingMgr);
 
     int targetUserId = 1; // 추천을 받을 사용자 ID
-    Recommender::recommend(targetUserId, ratingMgr); // 추천 실행
+    recommender.recommend(targetUserId); // 추천 실행
 
     return 0;
  

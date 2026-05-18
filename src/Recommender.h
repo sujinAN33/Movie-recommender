@@ -8,11 +8,12 @@
 
 class Recommender {
 private:
-    MovieManager& movieMgr;
-    RatingManager& ratingMgr;
+    MovieManager& movieMgr; // 영화 매니저 객체
+    RatingManager& ratingMgr; // 평점 매니저 객체
 public:
-    static int calculateSim(const std::vector<Rating>& user1, const std::vector<Rating>& user2);
-    static std::vector<std::pair<int, int>> findSimilarUsers(int targetUserId, const RatingManager& ratingMgr);
-    static void recommend(int targetUserId, const RatingManager& ratingMgr);
+    Recommender(MovieManager& m, RatingManager& r) : movieMgr(m), ratingMgr(r) {}
+    int calculateSim(const std::vector<Rating>& user1, const std::vector<Rating>& user2);
+    std::vector<std::pair<int, int>> findSimilarUsers(int targetUserId);
+    void recommend(int targetUserId);
 };
 #endif // RECOMMENDER_H

@@ -3,11 +3,11 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "Movie.h" // Assuming Movie.h defines the Movie class
-#include "BaseManager.h" // Assuming BaseManager.h defines the BaseManager class
+#include "Movie.h" 
+#include "BaseManager.h" 
 class MovieManager : public BaseManager {
 private:
-    std::vector<Movie> movies; // Assuming Movie is a class that represents a movie
+    std::vector<Movie> movies; 
 public:
     void addMovie(const Movie& movie);
     Movie* findMovieById(int movieId);
