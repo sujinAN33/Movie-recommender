@@ -12,3 +12,11 @@ public:
     void addUser(const User& user); 
     void printUsers() const;
 };
+
+bool operator==(const User& lhs, const User& rhs);
+bool operator!=(const User& lhs, const User& rhs);
+bool operator<(const User& lhs, const User& rhs);
+bool operator>(const User& lhs, const User& rhs);
+bool operator<=(const User& lhs, const User& rhs);
+bool operator>=(const User& lhs, const User& rhs);
+std::ostream& operator<<(std::ostream& os, const User& user);

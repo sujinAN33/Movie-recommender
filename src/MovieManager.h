@@ -13,4 +13,13 @@ public:
     void findByTitle(const std::string& title) const;
     void sortByRating() const;
     void printAll() const;
+
 };
+
+    bool operator==(const Movie& lhs, const Movie& rhs);
+    bool operator!=(const Movie& lhs, const Movie& rhs);
+    bool operator<(const Movie& lhs, const Movie& rhs);
+    bool operator>(const Movie& lhs, const Movie& rhs);
+    bool operator<=(const Movie& lhs, const Movie& rhs);
+    bool operator>=(const Movie& lhs, const Movie& rhs);
+    std::ostream& operator<<(std::ostream& os, const Movie& movie);

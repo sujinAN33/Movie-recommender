@@ -1,24 +1,17 @@
 CXX = g++ #C++ 컴파일러
 CXXFLAGS = -std=c++17 -Wall -Wextra #컴파일 옵션
 TARGET = movie_recommender #실행 파일
-SRCS = main.cpp Movie.cpp MovieManager.cpp User.cpp UserManager.cpp Rating.cpp RatingManager.cpp #소스 파일
+SRCDIR = src
+SRCS = $(wildcard $(SRCDIR)/*.cpp) #소스 파일
 OBJS = $(SRCS:.cpp=.o) #목적 파일
 
 all: $(TARGET) #기본 타겟 - make 명령어를 실행했을 때 호출되는 타겟
-
-Movie.o: Movie.cpp Movie.h
-MovieManager.o: MovieManager.cpp MovieManager.h Movie.h
-User.o: User.cpp User.h
-UserManager.o: UserManager.cpp UserManager.h User.h
-Rating.o: Rating.cpp Rating.h
-RatingManager.o: RatingManager.cpp RatingManager.h Rating.h User.h Movie.h
-main.o: main.cpp Movie.h MovieManager.h User.h UserManager.h Rating.h RatingManager.h
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^ #목적 파일을 링크하여 실행 파일 생성
 	# $@는 타겟 이름, $^는 모든 의존 파일을 나타냄
 
-%.o: %.cpp
+$(SRCDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ #.cpp 파일을 .o 파일로 컴파일
 
 clean:

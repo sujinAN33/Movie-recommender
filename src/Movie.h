@@ -23,16 +23,4 @@ public:
     int         getRatingCount()     const;  // 추가
 
     void addRating(double r);               // 추가
-    
-    //연산자 오버로딩 추가
-    bool operator==(const Movie& other) const;
-    bool operator!=(const Movie& other) const;
-    bool operator<(const Movie& other) const;
-    bool operator>(const Movie& other) const;
-    bool operator<=(const Movie& other) const;
-    bool operator>=(const Movie& other) const;
-
-    friend std::ostream& operator<<(std::ostream& os,const Movie& m);
-
-
 };
