@@ -1,5 +1,7 @@
 #include "MovieManager.h"
-
+#include <fstream>
+#include <sstream>
+using namespace std;
 
 void MovieManager::addMovie(const Movie& movie) {
     movies.push_back(movie);
@@ -15,14 +17,14 @@ Movie* MovieManager::findMovieById(int movieId) {
 }
 
 
-void MovieManager::findByTitle(const std::string& title) const {
-    for (const auto& m : movies) {
-        if (m.getTitle() == title) {
-            std::cout << m << std::endl;
-            return;
+Movie* MovieManager::findByTitle(const std::string& title) {
+    for (auto& movie : movies) {
+        if (movie.getTitle() == title) {
+            return &movie;
         }
     }
     std::cout << "영화를 찾을 수 없습니다: " << title << std::endl;
+    return nullptr;
 }
 void MovieManager::sortByRating() const {
     std::vector<Movie> sortedMovies = movies; // 원본 유지 위해 복사
@@ -43,6 +45,50 @@ void MovieManager::printAll() const {
     }
 }
 
+// BaseManager의 순수 가상 함수 구현
+void MovieManager::loadFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
+        return;
+    } 
+    string line;
+    getline(file, line); // 헤더 스킵
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string token;
+        getline(ss, token, ','); int movieId= stoi(token);
+        getline(ss, token, ','); string title = token;
+        getline(ss, token, ','); double year=stod(token);
+
+        movies.push_back(Movie(movieId, title, "", year)); // 장르와 개봉연도는 임시로 빈 문자열과 0으로 설정
+    }
+    file.close();
+
+}
+
+void MovieManager::saveToFile(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
+        return;
+    }
+    file << "movieId,title,releaseYear\n"; // 헤더 작성
+    for (const auto& movie : movies) {
+        file << movie.getId() << ","
+             << movie.getTitle() << ","
+             << movie.getReleaseYear() << "\n";
+    }
+    file.close();
+}
+
+int MovieManager::size() const {
+    return movies.size();
+}
+
+
+
+// 비교 연산자 오버로드
 bool operator==(const Movie& lhs, const Movie& rhs) {
     return lhs.getTitle() == rhs.getTitle() &&
            lhs.getReleaseYear() == rhs.getReleaseYear();
