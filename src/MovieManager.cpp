@@ -56,9 +56,9 @@ void MovieManager::loadFromFile(const std::string& filename)  {
     while (getline(file, line)) {
         stringstream ss(line);
         string token;
-        getline(ss, token, ','); int movieId= stoi(token);
-        getline(ss, token, ','); string title = token;
-        getline(ss, token, ','); double year=stod(token);
+        getline(ss, token, '|'); int movieId= stoi(token);
+        getline(ss, token, '|'); string title = token;
+        getline(ss, token, '|'); double year=stod(token);
 
         movies.push_back(Movie(movieId, title, "", year)); // 장르와 개봉연도는 임시로 빈 문자열과 0으로 설정
     }
@@ -72,10 +72,10 @@ void MovieManager::saveToFile(const std::string& filename) const {
         std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
         return;
     }
-    file << "movieId,title,releaseYear\n"; // 헤더 작성
+    file << "movieId|title|year\n"; // 헤더 작성(loadFromFile과 동일한 | 구분자·3칸)
     for (const auto& movie : movies) {
-        file << movie.getId() << ","
-             << movie.getTitle() << ","
+        file << movie.getId() << "|"
+             << movie.getTitle() << "|"
              << movie.getReleaseYear() << "\n";
     }
     file.close();

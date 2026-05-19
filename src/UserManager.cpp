@@ -20,7 +20,7 @@ void UserManager::printUsers() const {
     }
 }
 // BaseManager의 순수 가상 함수 구현
-void UserManager::loadFromFile(const std::string& filename) {
+void UserManager::loadFromFile(const std::string& filename) override {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
@@ -31,28 +31,28 @@ void UserManager::loadFromFile(const std::string& filename) {
     while (getline(file, line)) {
         std::stringstream ss(line);
         std::string token;
-        getline(ss, token, ','); int id= stoi(token);
-        getline(ss, token, ','); std::string name = token;
-        getline(ss, token, ','); std::string email = token;   
+        getline(ss, token, '|'); int id= stoi(token);
+        getline(ss, token, '|'); std::string name = token;
+        getline(ss, token, '|'); std::string email = token;   
         users.push_back(User(id, name, email));
     }
     file.close();
 }
-void UserManager::saveToFile(const std::string& filename) const {
+void UserManager::saveToFile(const std::string& filename) const override {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
         return;
     }
-    file << "id,name,email\n"; // 헤더 작성
+    file << "id|name|email\n"; // 헤더 작성
     for (const auto& user : users) {
-        file << user.getId() << ","
-             << user.getName() << ","
+        file << user.getId() << "|"
+             << user.getName() << "|"
              << user.getEmail() << "\n";
     }
     file.close();
 }
-int UserManager::size() const {
+int UserManager::size() const override{
     return users.size();
 }
 

@@ -60,9 +60,9 @@ void RatingManager::loadFromFile(const std::string& filename) {
     while (getline(file, line)) {
         stringstream ss(line);
         string token;
-        getline(ss, token, ','); int userId= stoi(token);
-        getline(ss, token, ','); int movieId= stoi(token);
-        getline(ss, token, ','); double rating=stod(token);
+        getline(ss, token, '|'); int userId= stoi(token);
+        getline(ss, token, '|'); int movieId= stoi(token);
+        getline(ss, token, '|'); double rating=stod(token);
 
         ratings.push_back(Rating(userId, movieId, rating));
     }
@@ -74,10 +74,10 @@ void RatingManager::saveToFile(const std::string& filename) const {
         std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
         return;
     }
-    file << "userId,movieId,rating\n"; // 헤더 작성
+    file << "userId|movieId|rating\n"; // 헤더 작성
     for (const auto& rating : ratings) {
-        file << rating.getUserId() << ","
-             << rating.getMovieId() << ","
+        file << rating.getUserId() << "|"
+             << rating.getMovieId() << "|"
              << rating.getScore() << "\n";
     }
     file.close();

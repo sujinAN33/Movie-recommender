@@ -40,13 +40,14 @@ vector<pair<int, double>> Recommender::findSimilarUsers(int targetUserId, int n)
         sims.push_back({otherId, sim});// 유사도가 0 이상인 사용자만 sims 벡터에 추가
     }
     sort(sims.begin(), sims.end(), [](const pair<int,double>& a, const pair<int,double>& b){
-        return a.second > b.second; //유사도가 높은 순으로 정렬
+        if (a.second != b.second) return a.second > b.second; //유사도가 높은 순으로 정렬
+        return a.first < b.first; //동점이면 사용자 ID 오름차순(출력 재현성 보장)
     });
-    if(sims.empty() || sims[0].second <= -100){
+    if(sims.empty()){
         return {}; // 유사한 사용자가 없으면 빈 벡터 반환
     }
-    
-    if (sims.size() > n) {
+
+    if (n > 0 && sims.size() > static_cast<size_t>(n)) {
         sims.resize(n); // 상위 n명만 남김
     }
     //n명보다 유사한 사용자가 적을 경우, 유사한 사용자 모두 반환
@@ -91,14 +92,18 @@ void Recommender::recommend(int targetUserId, int n) {
     //map을 벡터로 변환하여 정렬
     vector<pair<int, double>> sorted(movieReommendScore.begin(), movieReommendScore.end());
     sort(sorted.begin(), sorted.end(), [](const pair<int, double>& a, const pair<int, double>& b) {
-        return a.second > b.second; // 추천 점수가 높은 순으로 정렬
+        if (a.second != b.second) return a.second > b.second; // 추천 점수가 높은 순으로 정렬
+        return a.first < b.first; // 동점이면 영화 ID 오름차순(출력 재현성 보장)
     });
 
-    //정렬된 추천 영화 출력
+    //정렬된 추천 영화 중 상위 n개만 출력(추천할 영화가 n개 미만이면 있는 만큼만)
+    int printed = 0;
     for (const auto& rec : sorted) {
+        if (n > 0 && printed >= n) break;
         Movie* m = movieMgr.findMovieById(rec.first);
         if (m) {
             cout << "추천 영화: " << m->getTitle() << " (추천 점수: " << rec.second << ")" << endl;
+            printed++;
         }
     }
 }

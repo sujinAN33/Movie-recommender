@@ -12,9 +12,9 @@ public:
     User* findUserById(int userId);
     void addUser(const User& user); 
     void printUsers() const;
-    void loadFromFile(const std::string& filename);
-    void saveToFile(const std::string& filename) const;
-    int size() const;
+    void loadFromFile(const std::string& filename) override;
+    void saveToFile(const std::string& filename) const override;
+    int size() const override;
 };
 
 bool operator==(const User& lhs, const User& rhs);

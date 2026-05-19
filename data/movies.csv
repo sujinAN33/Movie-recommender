@@ -1,6 +1,6 @@
-movieId,title,year
-1,interstella,2010
-2,Parasite,2020
-3,Avata,2012
-4,Avengers,2021
-5,notebook,2011
+movieId|title|year
+1|interstella|2010
+2|Parasite|2020
+3|Avata|2012
+4|Avengers|2021
+5|notebook|2011
