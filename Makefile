@@ -1,5 +1,5 @@
 CXX = g++ #C++ 컴파일러
-CXXFLAGS = -std=c++17 -Wall -Wextra #컴파일 옵션
+CXXFLAGS = -std=c++17 -Wall -Wextra -I./include #컴파일 옵션
 TARGET = movie_recommender #실행 파일
 SRCDIR = src
 SRCS = $(wildcard $(SRCDIR)/*.cpp) #소스 파일

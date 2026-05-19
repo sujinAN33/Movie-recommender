@@ -1,0 +1,19 @@
+#컴파일 산출물
+*.o
+*.a
+*.out
+
+#obj디렉토리째 무시
+obj/
+
+#실행파일(Makefile target)
+main
+app
+
+#IDE 에디터 설정
+.vscode/
+.idea/
+
+#OS 파일
+.DS_Store
+Thumbs.db
