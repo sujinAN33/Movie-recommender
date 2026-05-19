@@ -11,7 +11,7 @@ int main(){
     Recommender recommender(movieMgr, ratingMgr);
 
     int targetUserId = 1; // 추천을 받을 사용자 ID
-    recommender.recommend(targetUserId); // 추천 실행
+    recommender.recommend(targetUserId,3); // 추천 실행
 
     return 0;
  
