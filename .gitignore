@@ -9,6 +9,7 @@ obj/
 #실행파일(Makefile target)
 main
 app
+movie_recommender
 
 #IDE 에디터 설정
 .vscode/

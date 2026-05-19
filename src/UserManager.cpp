@@ -20,7 +20,7 @@ void UserManager::printUsers() const {
     }
 }
 // BaseManager의 순수 가상 함수 구현
-void UserManager::loadFromFile(const std::string& filename) override {
+void UserManager::loadFromFile(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
@@ -38,7 +38,7 @@ void UserManager::loadFromFile(const std::string& filename) override {
     }
     file.close();
 }
-void UserManager::saveToFile(const std::string& filename) const override {
+void UserManager::saveToFile(const std::string& filename) const  {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
@@ -52,7 +52,7 @@ void UserManager::saveToFile(const std::string& filename) const override {
     }
     file.close();
 }
-int UserManager::size() const override{
+int UserManager::size() const {
     return users.size();
 }
 
